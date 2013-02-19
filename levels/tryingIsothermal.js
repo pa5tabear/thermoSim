@@ -4,7 +4,7 @@ $(function(){
 	animText = new AnimText(c);
 	myCanvas.height = canvasHeight;
 	renderer = new Renderer();
-	window.curLevel = new LevelTemplate();
+	window.curLevel = new TryingIsothermal();
 	curLevel.cutSceneEnd();
 	curLevel.init();
 	addJQueryElems($('button'), 'button');
@@ -19,7 +19,7 @@ myCanvas.width = $('#main').width();
 
 
 
-function LevelTemplate(){
+function TryingIsothermal(){
 	this.setStds();
 	this.wallSpeed = 1;
 	this.readouts = {};
@@ -30,7 +30,7 @@ function LevelTemplate(){
 	this.yMin = 30;
 	this.yMax = 350;
 }
-_.extend(LevelTemplate.prototype, 
+_.extend(TryingIsothermal.prototype, 
 			LevelTools, 
 {
 	init: function() {
@@ -42,14 +42,16 @@ _.extend(LevelTemplate.prototype,
 		{
 			sceneData: {
 				walls: [
-					{pts: [P(50, 50), P(400, 50), P(400, 350), P(50, 350)], handler: 'staticAdiabatic', handle: 'wally'} 
+					{pts: [P(50, 50), P(400, 50), P(400, 350), P(50, 350)], handler: 'cVIsothermal', temp: 200, handle: 'wally'} 
 				],
 				dots: [
-					{spcName: 'spc1', pos: P(55, 55), dims: V(200, 200), count: 50, temp: 300, returnTo: 'wally', tag: 'wally'} 
+					{spcName: 'spc1', pos: P(55, 55), dims: V(200, 200), count: 500, temp: 300, returnTo: 'wally', tag: 'wally'}, 
+					{spcName: 'spc3', pos: P(55, 55), dims: V(200, 200), count: 500, temp: 300, returnTo: 'wally', tag: 'wally'} 
 				],
 				dataDisplay: [
 					{wallInfo: "wally", data:'temp', readout: 'mainReadout'},
-					{wallInfo: 'wally', data:'pInt', readout: 'mainReadout'}
+					{wallInfo: 'wally', data:'pInt', readout: 'mainReadout'},
+					{wallInfo: 'wally', data:'qArrowsAmmt'}
 				]
 			},
 			prompts: [
